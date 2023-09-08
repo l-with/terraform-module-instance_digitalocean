@@ -3,8 +3,6 @@
 Terraform module to provide instance on 
 
 - [digitalocean](https://registry.terraform.io/providers/digitalocean/digitalocean/latest) 
-- [hetzner](https://registry.terraform.io/providers/hetznercloud/hcloud/latest)
-- [vsphere](https://registry.terraform.io/providers/hashicorp/vsphere/latest)
 
 ## Motivation
 

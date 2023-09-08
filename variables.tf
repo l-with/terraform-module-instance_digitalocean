@@ -1,47 +1,8 @@
-variable "cloud_provider" {
-  description = "the cloud provider to deploy to"
-  type        = string
-  validation {
-    condition     = contains(["digitalocean", "hetzner", "vsphere"], var.cloud_provider)
-    error_message = "Supported values (in order of descending detail) are digitalocean, hetzner, vsphere."
-  }
-}
-
-variable "hetzner_token" {
-  description = "the Hetzner Cloud API Token (used to query the server types)"
-  type        = string
-  default     = null
-  sensitive   = true
-}
-
-variable "hetzner_preferred_country_locations" {
-  description = "the location that should be preferred for the countries with more than one location"
-  type        = list(map(string))
-  default = [{
-    "DE" : "fsn1",
-    "US" : "hil",
-  }]
-}
-
 variable "digitalocean_token" {
   description = "the Digital Ocean API token (used to query the server types)"
   type        = string
   default     = null
   sensitive   = true
-}
-
-variable "vsphere" {
-  description = "the vsphere names of the datacenter, datastore, cluster and network and optional the name of tag_category and disk and the folder"
-  type = object({
-    datacenter_name   = string
-    datastore_name    = string
-    cluster_name      = string
-    network_name      = string
-    folder            = optional(string, "/")
-    disk_name         = optional(string, "disk0")
-    tag_category_name = optional(string, null)
-  })
-  default = null
 }
 
 variable "digitalocean_preferred_country_region_slugs" {
