@@ -3,21 +3,21 @@ locals {
 }
 
 data "http" "digitalocean_sizes" {
-  url   = "https://api.digitalocean.com/v2/sizes?per_page=200"
+  url = "https://api.digitalocean.com/v2/sizes?per_page=200"
   request_headers = {
     Authorization = "Bearer ${var.digitalocean_token}"
   }
 }
 
 data "http" "digitalocean_regions" {
-  url   = "https://api.digitalocean.com/v2/regions"
+  url = "https://api.digitalocean.com/v2/regions"
   request_headers = {
     Authorization = "Bearer ${var.digitalocean_token}"
   }
 }
 
 data "http" "digitalocean_images" {
-  url   = "https://api.digitalocean.com/v2/images?per_page=200"
+  url = "https://api.digitalocean.com/v2/images?per_page=200"
   request_headers = {
     Authorization = "Bearer ${var.digitalocean_token}"
   }
@@ -53,9 +53,9 @@ locals {
   ]
   merged_digitalocean_preferred_country_slugs = merge(var.digitalocean_preferred_country_region_slugs...)
   digitalocean_country_region = length(local.digitalocean_country_regions) == 1 ? local.digitalocean_country_regions : [
-      for region in local.digitalocean_country_regions :
-      region if region.slug == lookup(local.merged_digitalocean_preferred_country_slugs, var.country, region.slug)
-    ]
+    for region in local.digitalocean_country_regions :
+    region if region.slug == lookup(local.merged_digitalocean_preferred_country_slugs, var.country, region.slug)
+  ]
   digitalocean_region_slug = (
     length(local.digitalocean_country_region) == 0 ? null : (
       length(local.digitalocean_country_region) == 1 ? local.digitalocean_country_region[0].slug :
